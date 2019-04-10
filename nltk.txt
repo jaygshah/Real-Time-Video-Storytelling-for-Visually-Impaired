@@ -1,0 +1,5 @@
+brown
+punkt
+averaged_perceptron_tagger
+snowball_text
+book_grammars
