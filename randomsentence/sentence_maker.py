@@ -14,7 +14,7 @@ class SentenceMaker:
     def __init__(self):
         self.random_sentences = RandomSentence(do_markovify=False)
 
-    def from_keyword_list(self, keyword_list, strictness=2, timeout=3):
+    def from_keyword_list(self, keyword_list, strictness=1, timeout=3):
         """
         Convert a list of keywords to sentence. The result is sometimes None
 
@@ -89,4 +89,4 @@ class SentenceMaker:
 
 
 if __name__ == '__main__':
-    print(SentenceMaker().from_keyword_list(['Love', 'blind', 'trouble']))
+    print(SentenceMaker().from_keyword_list(['chairs', 'blind', 'trouble']))

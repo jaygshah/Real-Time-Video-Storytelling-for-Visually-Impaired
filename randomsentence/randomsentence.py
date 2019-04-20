@@ -1,4 +1,9 @@
 from nltk.corpus import brown
+from nltk.corpus import nps_chat
+from nltk.corpus import genesis
+
+# from nltk.corpus import snowball_data
+
 import markovify
 try:
     from secrets import choice
@@ -14,7 +19,14 @@ class RandomSentence:
 
         :param do_markovify:
         """
+        print("tagging the datasets...please wait!")
+        # print(list(brown.tagged_sents()))
+        # print(list(nps_chat.tagged_words()))
         self.tagged_sents = list(brown.tagged_sents())
+        self.tagged_sents.append(list(nps_chat.tagged_words()))
+        # self.tagged_sents.append(list(genesis.tagged_words()))
+        # self.tagged_sents.append(list(snowball_data.tagged_words()))
+
         if do_markovify:
             self.model = markovify.Chain(self.tagged_sents, 2)
 

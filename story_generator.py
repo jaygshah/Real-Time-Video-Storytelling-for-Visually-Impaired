@@ -1,16 +1,15 @@
 from randomsentence.sentence_maker import SentenceMaker
 from randomsentence.sentence_tools import SentenceTools
 sentence_maker = SentenceMaker()
-tagged_sentence = sentence_maker.from_keyword_list(['boy', 'park', 'grass', 'play'])
-print(tagged_sentence)
+tagged_sentence = sentence_maker.from_keyword_list(['person', 'students', 'chairs', 'laptops', 'projector'])
+# print(tagged_sentence)
 sentence_tools = SentenceTools()
-print(sentence_tools.detokenize_tagged(tagged_sentence))
+output = sentence_tools.detokenize_tagged(tagged_sentence)
+print(output)
 
-
-
-# from randomsentence import GrammarCorrector
+# from randomsentence.grammar_check import GrammarCorrector
 # corrector = GrammarCorrector()
-# print(corrector.correct('A sentence with a error in the Hitchhiker’s Guide tot he Galaxy'))
+# print(corrector.correct(output))
 # # 'A sentence with an error in the Hitchhiker’s Guide to the Galaxy'
 
 
