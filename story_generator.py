@@ -21,3 +21,7 @@ print(output)
 # print(tagged_sentence)
 # sentence_tools = SentenceTools()
 # print(sentence_tools.detokenize_tagged(tagged_sentence))
+
+
+with open("story.txt", "w") as text_file:
+    text_file.write(output)

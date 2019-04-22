@@ -89,4 +89,5 @@ class SentenceMaker:
 
 
 if __name__ == '__main__':
-    print(SentenceMaker().from_keyword_list(['chairs', 'blind', 'trouble']))
+    # print(SentenceMaker().from_keyword_list(['chairs', 'blind', 'trouble']))
+    print("we are in sentence_maker's main")
