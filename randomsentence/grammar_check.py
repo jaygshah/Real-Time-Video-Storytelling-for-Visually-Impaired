@@ -28,7 +28,8 @@ class GrammarCorrector:
         :param str sentence:
         :param str temp_file:
         :return str: grammatically correct sentence
-        >>> GrammarCorrector().correct('A sentence with a error in the Hitchhiker’s Guide tot he Galaxy')
+        >>> GrammarCorrector().correct('A sentence with a error in the 
+        Hitchhiker’s Guide tot he Galaxy')
         'A sentence with an error in the Hitchhiker’s Guide to the Galaxy'
         """
         if isinstance(self.tool, str):

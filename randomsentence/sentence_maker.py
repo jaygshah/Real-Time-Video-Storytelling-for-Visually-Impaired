@@ -24,7 +24,9 @@ class SentenceMaker:
         :return list of tuple: sentence generated
 
         >>> SentenceMaker().from_keyword_list(['Love', 'blind', 'trouble'])
-        [('For', False), ('love', True), ('to', False), ('such', False), ('blind', True), ('we', False), ('must', False), ('turn', False), ('to', False), ('the', False), ('trouble', True)]
+        [('For', False), ('love', True), ('to', False), ('such', False), 
+        ('blind', True), ('we', False), ('must', False), ('turn', False), ('to', False), 
+        ('the', False), ('trouble', True)]
         """
         keyword_tags = nltk.pos_tag(keyword_list)
 

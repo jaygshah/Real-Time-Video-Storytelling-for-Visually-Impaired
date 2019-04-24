@@ -14,8 +14,11 @@ class SentenceTools:
         """
         Join words/sentence_tokens
         :param list of str tokens:
-        >>> SentenceTools().detokenize(['The', 'White', 'Russians', 'and', 'the', 'Ukrainians', 'would', 'say', 'that', 'Stalin', 'and', 'Molotov', 'were', 'far', 'less', 'reliable', 'defenders', 'of', 'Russia', 'than', 'Curzon', 'and', 'Clemenceau', '.'])
-        'The White Russians and the Ukrainians would say that Stalin and Molotov were far less reliable defenders of Russia than Curzon and Clemenceau.'
+        >>> SentenceTools().detokenize(['The', 'White', 'Russians', 'and', 'the', 
+        'Ukrainians', 'would', 'say', 'that', 'Stalin', 'and', 'Molotov', 'were', 'far', 'less', 
+        'reliable', 'defenders', 'of', 'Russia', 'than', 'Curzon', 'and', 'Clemenceau', '.'])
+        'The White Russians and the Ukrainians would say that Stalin and Molotov were far less 
+        reliable defenders of Russia than Curzon and Clemenceau.'
         """
         return self.detokenizer(tokens)
 

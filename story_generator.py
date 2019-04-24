@@ -1,7 +1,7 @@
 from randomsentence.sentence_maker import SentenceMaker
 from randomsentence.sentence_tools import SentenceTools
 sentence_maker = SentenceMaker()
-tagged_sentence = sentence_maker.from_keyword_list(['person', 'students', 'chairs', 'laptops', 'projector'])
+tagged_sentence = sentence_maker.from_keyword_list(['garden', 'grass', 'children', 'playing'])
 # print(tagged_sentence)
 sentence_tools = SentenceTools()
 output = sentence_tools.detokenize_tagged(tagged_sentence)
