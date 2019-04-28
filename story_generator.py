@@ -1,8 +1,35 @@
+'''
+##########################################################################
+PUB SUB SERVER SUBSCRIBER
+##########################################################################
+import os
+from google.cloud import pubsub_v1
+
+subscriber = pubsub_v1.SubscriberClient()
+topic_name = 'projects/{project_id}/topics/{topic}'.format(
+    project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
+    topic='RTVSTS',  # Real-Time-Video-Story-Telling-Service
+)
+subscription_name = 'projects/{project_id}/subscriptions/{sub}'.format(
+    project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
+    sub='RTVSTS-SUB',  # Real-Time-Video-Story-Telling-Service_Subscription
+)
+subscriber.create_subscription(
+    name=subscription_name, topic=topic_name)
+
+def callback(message):
+    print(message.data)
+    message.ack()
+
+future = subscriber.subscribe(subscription_name, callback)
+##########################################################################
+##########################################################################
+'''
 from randomsentence.sentence_maker import SentenceMaker
 from randomsentence.sentence_tools import SentenceTools
 sentence_maker = SentenceMaker()
-tagged_sentence = sentence_maker.from_keyword_list(['garden', 'grass', 'children', 'playing'])
-# print(tagged_sentence)
+tagged_sentence = sentence_maker.from_keyword_list(['presentation', 'public speaking', 'politics', 'orator', 'speaker', 'audience', 'city council', 'conversation','lecture', 'official', 'speech'])
+# tagged_sentence = sentence_maker.from_keyword_list(message.data)
 sentence_tools = SentenceTools()
 output = sentence_tools.detokenize_tagged(tagged_sentence)
 print(output)

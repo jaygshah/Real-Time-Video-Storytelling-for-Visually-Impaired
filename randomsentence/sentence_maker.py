@@ -35,6 +35,7 @@ class SentenceMaker:
             index = 0
             output_list = []
             tagged_sent = self.random_sentences.get_tagged_sent()
+            # print(tagged_sent)
             for word, tag in tagged_sent:
                 if index >= len(keyword_tags):
                     return self.get_overlap(keyword_list, output_list, is_word_list=True)

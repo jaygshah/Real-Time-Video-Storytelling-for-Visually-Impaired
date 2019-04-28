@@ -2,6 +2,8 @@ import nltk
 from nltk.corpus import brown
 from nltk.corpus import nps_chat
 from nltk.corpus import genesis
+from nltk.corpus import gutenberg
+from nltk.corpus import treebank
 
 # from nltk.corpus import snowball_data
 
@@ -16,15 +18,23 @@ __doctest_skip__ = ['RandomSentence.get_tagged_sent']
 
 class RandomSentence:
     def __init__(self, do_markovify=True):
-        print("tagging the datasets...please wait!")
+        print("tagging the datasets and markovifying them ... please wait!")
         # print(list(brown.tagged_sents()))
         # print(list(nps_chat.tagged_words()))
+
         self.tagged_sents = list(brown.tagged_sents())
+        # self.tagged_sents = list(treebank.tagged_sents())
+        # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt')))
+
+        self.tagged_sents.append(list(treebank.tagged_sents()))
         # self.tagged_sents.append(list(nps_chat.tagged_words()))
-        self.tagged_sents.append(list(nltk.pos_tag(nltk.corpus.gutenberg.words('austen-emma.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(nltk.corpus.gutenberg.words('austen-persuasion.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(nltk.corpus.gutenberg.words('austen-sense.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(nltk.corpus.genesis.words('english-web.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-persuasion.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-sense.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (genesis.sents('english-web.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(gutenberg.sents('austen-persuasion.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(gutenberg.sents('austen-sense.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(genesis.sents('english-web.txt'))))
         # self.tagged_sents.append(list(genesis.tagged_words()))
         # self.tagged_sents.append(list(snowball_data.tagged_words()))
 
