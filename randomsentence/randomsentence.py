@@ -19,25 +19,31 @@ __doctest_skip__ = ['RandomSentence.get_tagged_sent']
 class RandomSentence:
     def __init__(self, do_markovify=True):
         print("tagging the datasets and markovifying them ... please wait!")
-        # print(list(brown.tagged_sents()))
+        print(list(brown.tagged_sents()))
         # print(list(nps_chat.tagged_words()))
+        # with open("reddit_apple_android.txt", "w") as text_file:
+        #     self.tagged_sents = list(nltk.pos_tag(sent) for sent in (text_file.sents('reddit_apple_android.txt')))
 
-        self.tagged_sents = list(brown.tagged_sents())
+        # self.tagged_sents = list(brown.tagged_sents())
         # self.tagged_sents = list(treebank.tagged_sents())
         # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt')))
-
-        self.tagged_sents.append(list(treebank.tagged_sents()))
+        # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('quora.txt')))
+        # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('reddit_apple_android.txt')))
+        # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('hackernews.txt')))
+        # self.tagged_sents.append(list(treebank.tagged_sents()))
         # self.tagged_sents.append(list(nps_chat.tagged_words()))
-        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-persuasion.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-sense.txt'))))
-        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (genesis.sents('english-web.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-persuasion.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-sense.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('reddit_apple_android.txt'))))
+        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (genesis.sents('english-web.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(gutenberg.sents('austen-persuasion.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(gutenberg.sents('austen-sense.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(genesis.sents('english-web.txt'))))
         # self.tagged_sents.append(list(genesis.tagged_words()))
-        # self.tagged_sents.append(list(snowball_data.tagged_words()))
+        # self.tagged_sents.append(list(snowball_data.tagged_words()))  
 
+        # print(self.tagged_sents)
         if do_markovify:
             self.model = markovify.Chain(self.tagged_sents, 2)
 

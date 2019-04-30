@@ -12,7 +12,7 @@ class SentenceTools:
 
     def detokenize(self, tokens):
         """
-        Join words/sentence_tokens
+        Joins words/sentence_tokens
         :param list of str tokens:
         >>> SentenceTools().detokenize(['The', 'White', 'Russians', 'and', 'the', 
         'Ukrainians', 'would', 'say', 'that', 'Stalin', 'and', 'Molotov', 'were', 'far', 'less', 
@@ -23,11 +23,6 @@ class SentenceTools:
         return self.detokenizer(tokens)
 
     def detokenize_tagged(self, tagged_tokens):
-        """
-
-        :param tagged_tokens:
-        :return:
-        """
         return self.detokenize([token for token, tag in tagged_tokens])
 
 

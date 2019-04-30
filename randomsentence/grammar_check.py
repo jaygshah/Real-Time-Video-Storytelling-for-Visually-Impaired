@@ -24,9 +24,6 @@ class GrammarCorrector:
 
     def correct(self, sentence, temp_file='tmp.txt'):
         """
-
-        :param str sentence:
-        :param str temp_file:
         :return str: grammatically correct sentence
         >>> GrammarCorrector().correct('A sentence with a error in the 
         Hitchhiker’s Guide tot he Galaxy')
