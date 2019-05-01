@@ -15,20 +15,20 @@ class SentenceMaker:
         self.random_sentences = RandomSentence(do_markovify=False)
 
     def from_keyword_list(self, keyword_list, strictness=1, timeout=3):
-        """
-        converts a list of keywords to sentence. The result can be None (sometimes)
+    
+        # converts a list of keywords to sentence. The result can be None (sometimes)
 
-        :param list keyword_list: a list of string
-        :param int | None strictness: None for highest strictness. 2 or 1 for a less strict POS matching
-        :param float timeout: timeout of this function
-        :return list of tuple: sentence generated
+        # :param list keyword_list: a list of string
+        # :param int | None strictness: None for highest strictness. 2 or 1 for a less strict POS matching
+        # :param float timeout: timeout of this function
+        # :return list of tuple: sentence generated
 
-        just some examples I recorded from command line
-        >>> SentenceMaker().from_keyword_list(['Love', 'blind', 'trouble'])
-        [('For', False), ('love', True), ('to', False), ('such', False), 
-        ('blind', True), ('we', False), ('must', False), ('turn', False), ('to', False), 
-        ('the', False), ('trouble', True)]
-        """
+        # just some examples I recorded from command line
+        # >>> SentenceMaker().from_keyword_list(['Love', 'blind', 'trouble'])
+        # [('For', False), ('love', True), ('to', False), ('such', False), 
+        # ('blind', True), ('we', False), ('must', False), ('turn', False), ('to', False), 
+        # ('the', False), ('trouble', True)]
+    
         keyword_tags = nltk.pos_tag(keyword_list)
 
         start = time()
@@ -51,20 +51,20 @@ class SentenceMaker:
 
     @staticmethod
     def match_pos(pos1, pos2, strictness=2):
-        """
-        Matches part-of-speech as defined in https://catalog.ldc.upenn.edu/docs/LDC99T42/tagguid1.pdf
-        :return bool:
+        
+        # Matches part-of-speech as defined in https://catalog.ldc.upenn.edu/docs/LDC99T42/tagguid1.pdf
+        # :return bool:
 
-        >>> SentenceMaker.match_pos('NN', 'PRP', 0)
-        True
-        """
+        # >>> SentenceMaker.match_pos('NN', 'PRP', 0)
+        # True
+    
         return pos1[:strictness] == pos2[:strictness]
 
     @staticmethod
     def get_overlap(initials_list_or_word_list, tokens, is_word_list=True):
-        """
-        :return list of tuple:
-        """
+        
+        # :return list of tuple:
+    
         index = 0
         result = []
         for token in tokens:

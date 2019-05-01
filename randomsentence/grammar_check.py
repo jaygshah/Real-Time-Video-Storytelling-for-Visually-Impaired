@@ -23,12 +23,12 @@ class GrammarCorrector:
             self.tool = languagetool_commandline_path
 
     def correct(self, sentence, temp_file='tmp.txt'):
-        """
-        :return str: grammatically correct sentence
-        >>> GrammarCorrector().correct('A sentence with a error in the 
-        Hitchhiker’s Guide tot he Galaxy')
-        'A sentence with an error in the Hitchhiker’s Guide to the Galaxy'
-        """
+        
+        # :return str: grammatically correct sentence
+        # >>> GrammarCorrector().correct('A sentence with a error in the 
+        # Hitchhiker’s Guide tot he Galaxy')
+        # 'A sentence with an error in the Hitchhiker’s Guide to the Galaxy'
+        
         if isinstance(self.tool, str):
             return languagetool_commandline(sentence, self.tool, temp_file)
         else:

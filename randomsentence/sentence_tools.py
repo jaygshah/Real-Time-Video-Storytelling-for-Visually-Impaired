@@ -11,15 +11,15 @@ class SentenceTools:
         self.detokenizer = MosesDetokenizer('en')
 
     def detokenize(self, tokens):
-        """
-        Joins words/sentence_tokens
-        :param list of str tokens:
-        >>> SentenceTools().detokenize(['The', 'White', 'Russians', 'and', 'the', 
-        'Ukrainians', 'would', 'say', 'that', 'Stalin', 'and', 'Molotov', 'were', 'far', 'less', 
-        'reliable', 'defenders', 'of', 'Russia', 'than', 'Curzon', 'and', 'Clemenceau', '.'])
-        'The White Russians and the Ukrainians would say that Stalin and Molotov were far less 
-        reliable defenders of Russia than Curzon and Clemenceau.'
-        """
+    
+        # Joins words/sentence_tokens
+        # :param list of str tokens:
+        # >>> SentenceTools().detokenize(['The', 'White', 'Russians', 'and', 'the', 
+        # 'Ukrainians', 'would', 'say', 'that', 'Stalin', 'and', 'Molotov', 'were', 'far', 'less', 
+        # 'reliable', 'defenders', 'of', 'Russia', 'than', 'Curzon', 'and', 'Clemenceau', '.'])
+        # 'The White Russians and the Ukrainians would say that Stalin and Molotov were far less 
+        # reliable defenders of Russia than Curzon and Clemenceau.'
+    
         return self.detokenizer(tokens)
 
     def detokenize_tagged(self, tagged_tokens):
