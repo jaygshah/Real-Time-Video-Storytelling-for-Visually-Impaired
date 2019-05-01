@@ -1,90 +1,53 @@
+# Copyright 2015 Google Inc. All Rights Reserved.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-# ##########################################################################
-# PUB SUB SERVER SUBSCRIBER
-# ##########################################################################
-# import os
-# from google.cloud import pubsub_v1
-
-# subscriber = pubsub_v1.SubscriberClient()
-# topic_name = 'projects/{project_id}/topics/{topic}'.format(
-#     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
-#     topic='RTVSTS',  # Real-Time-Video-Story-Telling-Service
-# )
-# subscription_name = 'projects/{project_id}/subscriptions/{sub}'.format(
-#     project_id=os.getenv('GOOGLE_CLOUD_PROJECT'),
-#     sub='RTVSTS-SUB',  # Real-Time-Video-Story-Telling-Service_Subscription
-# )
-# subscriber.create_subscription(
-#     name=subscription_name, topic=topic_name)
-
-# def callback(message):
-#     print(message.data)
-#     message.ack()
-
-# future = subscriber.subscribe(subscription_name, callback)
-# ##########################################################################
-# ##########################################################################
-
-from randomsentence.sentence_maker import SentenceMaker
-from randomsentence.sentence_tools import SentenceTools
-sentence_maker = SentenceMaker()
-tagged_sentence = sentence_maker.from_keyword_list(['kitchen', 'floor', 'human', 'cooking'])
-# tagged_sentence = sentence_maker.from_keyword_list(message.data)
-sentence_tools = SentenceTools()
-output = sentence_tools.detokenize_tagged(tagged_sentence)
-print(output)
-# from randomsentence.grammar_check import GrammarCorrector
-# corrector = GrammarCorrector()
-# print(corrector.correct(output))
-# A sentence with an error in the Hitchhiker’s Guide to the Galaxy'
-
-# from randomsentence.randomsentence import RandomSentence
-# from randomsentence.sentence_tools import SentenceTools
-# random_sentence = RandomSentence()
-# tagged_sentence = random_sentence.get_tagged_sent()
-# print(tagged_sentence)
-# sentence_tools = SentenceTools()
-# print(sentence_tools.detokenize_tagged(tagged_sentence))
-
-# from flask import Flask
-# app = Flask(__name__)
-# @app.route('/')
-# def hello():
-#     #Return a friendly HTTP greeting.
-#     return output
-
-
-# if __name__ == '__main__':
-#     # This is used when running locally only. When deploying to Google App
-#     # Engine, a webserver process such as Gunicorn will serve the app. This
-#     # can be configured by adding an `entrypoint` to app.yaml.
-#     app.run(host='127.0.0.1', port=8080, debug=True)
-# # [END gae_python37_app]
-
-
-
-import webapp2
+# [START gae_flex_quickstart]
 import logging
 
-class MainPage(webapp2.RequestHandler):
-    def get(self):
-        # self.response.headers['Content-Type'] = 'text/plain'
-        logging.debug('This is a debug message')
-        logging.info('This is an info message')
-        logging.warning('This is a warning message')
-        logging.error('This is an error message')
-        logging.critical('This is a critical message')
-
-        try:
-            raise ValueError('This is a sample value error.')
-        except ValueError:
-            logging.exception('A example exception log.')
-        self.response.write(output)
+from flask import Flask
+from randomsentence.sentence_maker import SentenceMaker
+from randomsentence.sentence_tools import SentenceTools
 
 
-app = webapp2.WSGIApplication([
-    ('/', MainPage)
-], debug=True)
+app = Flask(__name__)
 
-# with open("story.txt", "w") as text_file:
-#     text_file.write(output)
+
+@app.route('/')
+def hello():
+    """Return a friendly HTTP greeting."""
+    
+    sentence_maker = SentenceMaker()
+    tagged_sentence = sentence_maker.from_keyword_list(['kitchen', 'floor', 'human', 'cooking'])
+    # tagged_sentence = sentence_maker.from_keyword_list(message.data)
+    sentence_tools = SentenceTools()
+    output = sentence_tools.detokenize_tagged(tagged_sentence)
+    logging.info(output)
+
+    return output
+
+
+@app.errorhandler(500)
+def server_error(e):
+    logging.exception('An error occurred during a request.')
+    return """
+    An internal error occurred: <pre>{}</pre>
+    See logs for full stacktrace.
+    """.format(e), 500
+
+
+if __name__ == '__main__':
+    # This is used when running locally. Gunicorn is used to run the
+    # application on Google App Engine. See entrypoint in app.yaml.
+    app.run(host='127.0.0.1', port=8080, debug=True)
+# [END gae_flex_quickstart]

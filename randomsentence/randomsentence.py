@@ -1,5 +1,6 @@
 import nltk
 nltk.download('brown')
+nltk.download('averaged_perceptron_tagger')
 
 from nltk.corpus import brown
 # from nltk.corpus import nps_chat

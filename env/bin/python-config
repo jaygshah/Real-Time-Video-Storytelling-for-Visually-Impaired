@@ -1,4 +1,4 @@
-#!/Users/jayshah/Desktop/Real-Time-Video-Storytelling-for-Visually-Impaired/env/bin/python
+#!/home/adi/GitHub/python-docs-samples/appengine/flexible/hello_world/env/bin/python
 
 import sys
 import getopt
