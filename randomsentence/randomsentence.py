@@ -8,7 +8,7 @@ nltk.download('treebank')
 from nltk.corpus import brown
 # from nltk.corpus import nps_chat
 # from nltk.corpus import genesis
-from nltk.corpus import gutenberg
+# from nltk.corpus import gutenberg
 from nltk.corpus import treebank
 
 # from nltk.corpus import snowball_data

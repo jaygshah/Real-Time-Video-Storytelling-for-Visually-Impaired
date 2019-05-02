@@ -34,7 +34,9 @@ def hello():
     labels = labels.split(",")
     path = request.args.get('video_file_path')
     if path == None or len(path) == None or labels == None or len(labels) == None:
-        return 'empty query parameters'
+        return 'Wrong or Empty Query parameters to the Sentence Generator Module'
+    if labels[0] == 'please wait' and len(labels) == 1:
+        return 'Please try again'
     
     # tags = parms[0].split(",")
     ###############################################
@@ -50,7 +52,9 @@ def hello():
     # output = jsonify(output)
 
     ref = db.reference(path)
-    ref.set(output)
+    sentences = []
+    sentences.append(output)
+    ref.set(sentences)
     # ref.push({
     #     'mac-address': mcadd,
     #     'file-name': filename,
