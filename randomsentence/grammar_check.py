@@ -6,7 +6,6 @@ except ImportError:
 
 __doctest_skip__ = ['GrammarCorrector.correct']
 
-
 def languagetool_commandline(bad_sentence, executable_path, temp_file='tmp.txt'):
     with open(temp_file, 'w') as f:
         f.write(bad_sentence)
@@ -24,7 +23,7 @@ class GrammarCorrector:
 
     def correct(self, sentence, temp_file='tmp.txt'):
         
-        # :return str: grammatically correct sentence
+        # return str: grammatically correct sentence
         # >>> GrammarCorrector().correct('A sentence with a error in the 
         # Hitchhiker’s Guide tot he Galaxy')
         # 'A sentence with an error in the Hitchhiker’s Guide to the Galaxy'

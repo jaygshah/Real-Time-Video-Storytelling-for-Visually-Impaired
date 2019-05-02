@@ -1,12 +1,15 @@
 import nltk
 nltk.download('brown')
 nltk.download('averaged_perceptron_tagger')
+nltk.download('treebank')
+nltk.download('gutenberg')
+nltk.download('punkt')
 
 from nltk.corpus import brown
 # from nltk.corpus import nps_chat
 # from nltk.corpus import genesis
-# from nltk.corpus import gutenberg
-# from nltk.corpus import treebank
+from nltk.corpus import gutenberg
+from nltk.corpus import treebank
 
 # from nltk.corpus import snowball_data
 
@@ -33,9 +36,10 @@ class RandomSentence:
         # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('quora.txt')))
         # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('reddit_apple_android.txt')))
         # self.tagged_sents = list(nltk.pos_tag(sent) for sent in (gutenberg.sents('hackernews.txt')))
-        # self.tagged_sents.append(list(treebank.tagged_sents()))
+        self.tagged_sents.append(list(treebank.tagged_sents()))
         # self.tagged_sents.append(list(nps_chat.tagged_words()))
-        # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-emma.txt'))))
+        self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('chesterton-brown.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-persuasion.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('austen-sense.txt'))))
         # self.tagged_sents.append(list(nltk.pos_tag(sent) for sent in (gutenberg.sents('reddit_apple_android.txt'))))
@@ -51,8 +55,6 @@ class RandomSentence:
             self.model = markovify.Chain(self.tagged_sents, 2)
 
     def get_tagged_sent(self):
-    
-
         # return list of tuples of non-space-separated strings
         # >>> random_sentence = RandomSentence()
         # >>> random_sentence.get_tagged_sent()
@@ -71,7 +73,6 @@ class RandomSentence:
             return list(self.model.gen())
         except AttributeError:
             return choice(self.tagged_sents)
-
 
 if __name__ == '__main__':
     import doctest

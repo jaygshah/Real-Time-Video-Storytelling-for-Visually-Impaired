@@ -3,3 +3,5 @@ gunicorn==19.9.0
 nltk
 markovify
 mosestokenizer
+firebase_admin
+

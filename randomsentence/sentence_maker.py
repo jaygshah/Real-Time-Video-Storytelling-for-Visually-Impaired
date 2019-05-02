@@ -17,10 +17,6 @@ class SentenceMaker:
     def from_keyword_list(self, keyword_list, strictness=1, timeout=3):
     
         # converts a list of keywords to sentence. The result can be None (sometimes)
-
-        # :param list keyword_list: a list of string
-        # :param int | None strictness: None for highest strictness. 2 or 1 for a less strict POS matching
-        # :param float timeout: timeout of this function
         # :return list of tuple: sentence generated
 
         # just some examples I recorded from command line
@@ -62,8 +58,7 @@ class SentenceMaker:
 
     @staticmethod
     def get_overlap(initials_list_or_word_list, tokens, is_word_list=True):
-        
-        # :return list of tuple:
+        # :returns a list of tuple:
     
         index = 0
         result = []

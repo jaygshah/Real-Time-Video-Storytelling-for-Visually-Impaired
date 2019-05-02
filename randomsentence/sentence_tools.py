@@ -5,7 +5,6 @@ try:
 except ImportError:
     from random import choice
 
-
 class SentenceTools:
     def __init__(self):
         self.detokenizer = MosesDetokenizer('en')

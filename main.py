@@ -1,41 +1,54 @@
-# Copyright 2015 Google Inc. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 # [START gae_flex_quickstart]
 import logging
 
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import db
+cred = credentials.Certificate('video-storytelling-37f0c-firebase-adminsdk-skn9g-fd959c41fa.json')
+
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://jayoutput.firebaseio.com/'
+})
+
 from flask import Flask
+from flask import request
+from flask import jsonify
 from randomsentence.sentence_maker import SentenceMaker
 from randomsentence.sentence_tools import SentenceTools
 
-
 app = Flask(__name__)
 
-
 @app.route('/')
-def hello():
-    """Return a friendly HTTP greeting."""
-    
+def hello():    
     sentence_maker = SentenceMaker()
-    tagged_sentence = sentence_maker.from_keyword_list(['kitchen', 'floor', 'human', 'cooking'])
-    # tagged_sentence = sentence_maker.from_keyword_list(message.data)
+    # tagged_sentence = sentence_maker.from_keyword_list(['kitchen', 'floor', 'human', 'cooking'])
+    labels = request.args.get('labels')
+
+    if labels == None or len(labels) == None:
+        return 'empty query parameters'
+    # parms = labels.split(">")
+    labels = labels.split(",")
+    # tags = parms[0].split(",")
+    # macadd = parms[1]
+    # filename = parms[2]
+    # tagged_sentence = sentence_maker.from_keyword_list(request.args.get('labels'))
+
+    tagged_sentence = sentence_maker.from_keyword_list(labels)
+    # # tagged_sentence = sentence_maker.from_keyword_list(message.data)
     sentence_tools = SentenceTools()
     output = sentence_tools.detokenize_tagged(tagged_sentence)
     logging.info(output)
+    print(output)
+    # output = jsonify(output)
+
+    ref = db.reference('/')
+    ref.push({
+        # 'macadd': 'macadd',
+        # 'filename': filename,
+        'sentence': output,
+    })
 
     return output
-
 
 @app.errorhandler(500)
 def server_error(e):
