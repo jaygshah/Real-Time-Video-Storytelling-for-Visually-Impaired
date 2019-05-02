@@ -19,39 +19,49 @@ from randomsentence.sentence_tools import SentenceTools
 app = Flask(__name__)
 
 @app.route('/')
-def hello():    
-    sentence_maker = SentenceMaker()
+def hello():
     # tagged_sentence = sentence_maker.from_keyword_list(['kitchen', 'floor', 'human', 'cooking'])
+    
+    ###############################################
+    
+    # labels = request.args.get('labels')
+    # if labels == None or len(labels) == None:
+    #     return 'empty query parameters'
+    # labels = labels.split(",")
+    ###############################################
+
     labels = request.args.get('labels')
-
-    if labels == None or len(labels) == None:
-        return 'empty query parameters'
-    # parms = labels.split(">")
     labels = labels.split(",")
+    path = request.args.get('video_file_path')
+    if path == None or len(path) == None or labels == None or len(labels) == None:
+        return 'empty query parameters'
+    
     # tags = parms[0].split(",")
-    # macadd = parms[1]
-    # filename = parms[2]
-    # tagged_sentence = sentence_maker.from_keyword_list(request.args.get('labels'))
+    ###############################################
 
+
+    sentence_maker = SentenceMaker()
     tagged_sentence = sentence_maker.from_keyword_list(labels)
-    # # tagged_sentence = sentence_maker.from_keyword_list(message.data)
     sentence_tools = SentenceTools()
     output = sentence_tools.detokenize_tagged(tagged_sentence)
     logging.info(output)
+
     print(output)
     # output = jsonify(output)
 
-    ref = db.reference('/')
-    ref.push({
-        # 'macadd': 'macadd',
-        # 'filename': filename,
-        'sentence': output,
-    })
+    ref = db.reference(path)
+    ref.set(output)
+    # ref.push({
+    #     'mac-address': mcadd,
+    #     'file-name': filename,
+    #     'sentence': output,
+    # })
 
     return output
 
-@app.errorhandler(500)
+@app.errorhandler(500)  
 def server_error(e):
+    print(e)
     logging.exception('An error occurred during a request.')
     return """
     An internal error occurred: <pre>{}</pre>
